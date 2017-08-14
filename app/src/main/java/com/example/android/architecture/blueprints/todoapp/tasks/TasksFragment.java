@@ -275,11 +275,11 @@ public class TasksFragment extends Fragment {
             binding.setViewmodel(viewmodel);
             // To save on PropertyChangedCallbacks, wire the item's snackbar text observable to the
             // fragment's.
-            viewmodel.snackbarText.addOnPropertyChangedCallback(
+            viewmodel.getSnackbarText().addOnPropertyChangedCallback(
                     new Observable.OnPropertyChangedCallback() {
                 @Override
                 public void onPropertyChanged(Observable observable, int i) {
-                    mTasksViewModel.snackbarText.set(viewmodel.getSnackbarText());
+                    mTasksViewModel.snackbarText.set(viewmodel.getSnackbarTextString());
                 }
             });
             viewmodel.setTask(task);

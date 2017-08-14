@@ -92,8 +92,8 @@ public class TaskItemViewModelTest {
         mLoadTasksCallbackCaptor.getValue().onTaskLoaded(mTask); // Trigger callback
 
         // Then task detail UI is shown
-        assertEquals(mTaskItemViewModel.title.get(), mTask.getTitle());
-        assertEquals(mTaskItemViewModel.description.get(), mTask.getDescription());
+        assertEquals(mTaskItemViewModel.getTitle().get(), mTask.getTitle());
+        assertEquals(mTaskItemViewModel.getDescription().get(), mTask.getDescription());
     }
 
     @Test
@@ -105,8 +105,8 @@ public class TaskItemViewModelTest {
         mLoadTasksCallbackCaptor.getValue().onTaskLoaded(null); // Trigger callback
 
         // Then task detail UI is shown
-        assertEquals(mTaskItemViewModel.title.get(), NO_DATA_STRING);
-        assertEquals(mTaskItemViewModel.description.get(), NO_DATA_DESC_STRING);
+        assertEquals(mTaskItemViewModel.getTitle().get(), NO_DATA_STRING);
+        assertEquals(mTaskItemViewModel.getDescription().get(), NO_DATA_DESC_STRING);
     }
 
     @Test

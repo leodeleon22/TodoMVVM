@@ -69,7 +69,7 @@ public class TaskDetailFragment extends Fragment {
     @Override
     public void onDestroy() {
         if (mSnackbarCallback != null) {
-            mViewModel.snackbarText.removeOnPropertyChangedCallback(mSnackbarCallback);
+            mViewModel.getSnackbarText().removeOnPropertyChangedCallback(mSnackbarCallback);
         }
         super.onDestroy();
     }
@@ -78,10 +78,10 @@ public class TaskDetailFragment extends Fragment {
         mSnackbarCallback = new Observable.OnPropertyChangedCallback() {
             @Override
             public void onPropertyChanged(Observable observable, int i) {
-                SnackbarUtilsKt.snack(getView(), mViewModel.getSnackbarText());
+                SnackbarUtilsKt.snack(getView(), mViewModel.getSnackbarTextString());
             }
         };
-        mViewModel.snackbarText.addOnPropertyChangedCallback(mSnackbarCallback);
+        mViewModel.getSnackbarText().addOnPropertyChangedCallback(mSnackbarCallback);
     }
 
     private void setupFab() {

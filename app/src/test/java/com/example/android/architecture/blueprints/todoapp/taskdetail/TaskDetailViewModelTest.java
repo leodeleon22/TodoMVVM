@@ -104,8 +104,8 @@ public class TaskDetailViewModelTest {
         setupViewModelRepositoryCallback();
 
         // Then verify that the view was notified
-        assertEquals(mTaskDetailViewModel.title.get(), mTask.getTitle());
-        assertEquals(mTaskDetailViewModel.description.get(), mTask.getDescription());
+        assertEquals(mTaskDetailViewModel.getTitle().get(), mTask.getTitle());
+        assertEquals(mTaskDetailViewModel.getDescription().get(), mTask.getDescription());
     }
 
     @Test
@@ -169,8 +169,8 @@ public class TaskDetailViewModelTest {
         assertFalse(mTaskDetailViewModel.isDataAvailable());
 
         // Then task detail UI is shown
-        assertEquals(mTaskDetailViewModel.title.get(), NO_DATA_STRING);
-        assertEquals(mTaskDetailViewModel.description.get(), NO_DATA_DESC_STRING);
+        assertEquals(mTaskDetailViewModel.getTitle().get(), NO_DATA_STRING);
+        assertEquals(mTaskDetailViewModel.getDescription().get(), NO_DATA_DESC_STRING);
     }
 
     private void setupViewModelRepositoryCallback() {
@@ -188,7 +188,7 @@ public class TaskDetailViewModelTest {
     @Test
     public void updateSnackbar_nullValue() {
         // Before setting the Snackbar text, get its current value
-        String snackbarText = mTaskDetailViewModel.getSnackbarText();
+        String snackbarText = mTaskDetailViewModel.getSnackbarTextString();
 
         // Check that the value is null
         assertThat("Snackbar text does not match", snackbarText, is(nullValue()));
@@ -197,10 +197,10 @@ public class TaskDetailViewModelTest {
     @Test
     public void updateSnackbar_nonNullValue() {
         // Set a new value for the Snackbar text via the public Observable
-        mTaskDetailViewModel.snackbarText.set(SNACKBAR_TEXT);
+        mTaskDetailViewModel.getSnackbarText().set(SNACKBAR_TEXT);
 
         // Get its current value with the Snackbar text getter
-        String snackbarText = mTaskDetailViewModel.getSnackbarText();
+        String snackbarText = mTaskDetailViewModel.getSnackbarTextString();
 
         // Check that the value matches the observable's.
         assertThat("Snackbar text does not match", snackbarText, is(SNACKBAR_TEXT));
