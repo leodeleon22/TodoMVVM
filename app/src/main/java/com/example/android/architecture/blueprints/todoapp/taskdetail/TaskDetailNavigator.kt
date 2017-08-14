@@ -14,12 +14,14 @@
  * limitations under the License.
  */
 
-package com.example.android.architecture.blueprints.todoapp.tasks;
+package com.example.android.architecture.blueprints.todoapp.taskdetail
 
 /**
- * Defines the navigation actions that can be called from the task list screen.
+ * Defines the navigation actions that can be called from the Details screen.
  */
-public interface TasksNavigator {
+interface TaskDetailNavigator {
 
-    void addNewTask();
+    fun onTaskDeleted()
+
+    fun onStartEditTask()
 }

@@ -35,7 +35,7 @@ import com.example.android.architecture.blueprints.todoapp.ViewModelHolder;
 import com.example.android.architecture.blueprints.todoapp.addedittask.AddEditTaskActivity;
 import com.example.android.architecture.blueprints.todoapp.statistics.StatisticsActivity;
 import com.example.android.architecture.blueprints.todoapp.taskdetail.TaskDetailActivity;
-import com.example.android.architecture.blueprints.todoapp.util.ActivityUtilsKt;
+import com.example.android.architecture.blueprints.todoapp.util.ExtensionsKt;
 import com.example.android.architecture.blueprints.todoapp.util.EspressoIdlingResource;
 
 
@@ -88,7 +88,7 @@ public class TasksActivity extends AppCompatActivity implements TaskItemNavigato
                     Injection.provideTasksRepository(getApplicationContext()),
                     getApplicationContext());
             // and bind it to this Activity's lifecycle using the Fragment Manager.
-            ActivityUtilsKt.addFragmentToActivity(
+            ExtensionsKt.addFragmentToActivity(
                     getSupportFragmentManager(),
                     ViewModelHolder.Companion.createContainer(viewModel),
                     TASKS_VIEWMODEL_TAG);
@@ -102,8 +102,8 @@ public class TasksActivity extends AppCompatActivity implements TaskItemNavigato
                 (TasksFragment) getSupportFragmentManager().findFragmentById(R.id.contentFrame);
         if (tasksFragment == null) {
             // Create the fragment
-            tasksFragment = TasksFragment.newInstance();
-            ActivityUtilsKt.addFragmentToActivity(
+            tasksFragment = TasksFragment.Companion.newInstance();
+            ExtensionsKt.addFragmentToActivity(
                     getSupportFragmentManager(), tasksFragment, R.id.contentFrame);
         }
         return tasksFragment;
@@ -177,7 +177,7 @@ public class TasksActivity extends AppCompatActivity implements TaskItemNavigato
     @Override
     public void openTaskDetails(String taskId) {
         Intent intent = new Intent(this, TaskDetailActivity.class);
-        intent.putExtra(TaskDetailActivity.EXTRA_TASK_ID, taskId);
+        intent.putExtra(TaskDetailActivity.Companion.getEXTRA_TASK_ID(), taskId);
         startActivityForResult(intent, AddEditTaskActivity.Companion.getREQUEST_CODE());
 
     }

@@ -15,6 +15,8 @@
  */
 
 package com.example.android.architecture.blueprints.todoapp.util
+
+import android.support.design.widget.Snackbar
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.view.LayoutInflater
@@ -22,27 +24,31 @@ import android.view.View
 import android.view.ViewGroup
 
 /**
-     * The `fragment` is added to the container view with id `frameId`. The operation is
-     * performed by the `fragmentManager`.
+ * The `fragment` is added to the container view with id `frameId`. The operation is
+ * performed by the `fragmentManager`.
 
-     */
-    fun FragmentManager.addFragmentToActivity(fragment: Fragment, frameId: Int) {
-        val transaction = this.beginTransaction()
-        transaction.add(frameId, fragment)
-        transaction.commit()
-    }
+ */
+fun FragmentManager.addFragmentToActivity(fragment: Fragment, frameId: Int) {
+    val transaction = this.beginTransaction()
+    transaction.add(frameId, fragment)
+    transaction.commit()
+}
 
-    /**
-     * The `fragment` is added to the container view with id `frameId`. The operation is
-     * performed by the `fragmentManager`.
+/**
+ * The `fragment` is added to the container view with id `frameId`. The operation is
+ * performed by the `fragmentManager`.
 
-     */
-    fun FragmentManager.addFragmentToActivity(fragment: Fragment, tag: String) {
-        val transaction = this.beginTransaction()
-        transaction.add(fragment, tag)
-        transaction.commit()
-    }
+ */
+fun FragmentManager.addFragmentToActivity(fragment: Fragment, tag: String) {
+    val transaction = this.beginTransaction()
+    transaction.add(fragment, tag)
+    transaction.commit()
+}
 
 fun ViewGroup.inflate(layoutId: Int, attachToRoot: Boolean = false): View {
     return LayoutInflater.from(context).inflate(layoutId, this, attachToRoot)
+}
+
+fun View.snack(snackbarText: String) {
+    Snackbar.make(this, snackbarText, Snackbar.LENGTH_LONG).show()
 }

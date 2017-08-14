@@ -18,6 +18,9 @@ package com.example.android.architecture.blueprints.todoapp
 
 import android.databinding.BindingAdapter
 import android.support.v4.widget.SwipeRefreshLayout
+import android.widget.ListView
+import com.example.android.architecture.blueprints.todoapp.data.Task
+import com.example.android.architecture.blueprints.todoapp.tasks.TasksFragment
 
 import com.example.android.architecture.blueprints.todoapp.tasks.TasksViewModel
 
@@ -34,3 +37,8 @@ fun setSwipeRefreshLayoutOnRefreshListener(view: ScrollChildSwipeRefreshLayout,
     view.setOnRefreshListener { viewModel.loadTasks(true) }
 }
 
+@BindingAdapter("app:items")
+fun setItems(listView: ListView, items: List<Task>) {
+    val adapter = listView.adapter as TasksFragment.TasksAdapter
+    adapter.replaceData(items)
+}

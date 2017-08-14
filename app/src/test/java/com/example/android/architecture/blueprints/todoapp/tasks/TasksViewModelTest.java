@@ -183,7 +183,7 @@ public class TasksViewModelTest {
     public void handleActivityResult_editOK() {
         // When TaskDetailActivity sends a EDIT_RESULT_OK
         mTasksViewModel.handleActivityResult(
-                AddEditTaskActivity.Companion.getREQUEST_CODE(), TaskDetailActivity.EDIT_RESULT_OK);
+                AddEditTaskActivity.Companion.getREQUEST_CODE(), TaskDetailActivity.Companion.getEDIT_RESULT_OK());
 
         // Then the snackbar shows the correct message
         assertThat(mTasksViewModel.getSnackbarText(), is("EDIT_RESULT_OK"));
@@ -203,7 +203,7 @@ public class TasksViewModelTest {
     public void handleActivityResult_deleteOk() {
         // When TaskDetailActivity sends a DELETE_RESULT_OK
         mTasksViewModel.handleActivityResult(
-                AddEditTaskActivity.Companion.getREQUEST_CODE(), TaskDetailActivity.DELETE_RESULT_OK);
+                AddEditTaskActivity.Companion.getREQUEST_CODE(), TaskDetailActivity.Companion.getDELETE_RESULT_OK());
 
         // Then the snackbar shows the correct message
         assertThat(mTasksViewModel.getSnackbarText(), is("DELETE_RESULT_OK"));
