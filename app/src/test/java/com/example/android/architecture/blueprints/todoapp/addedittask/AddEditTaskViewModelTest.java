@@ -71,8 +71,8 @@ public class AddEditTaskViewModelTest {
     @Test
     public void saveNewTaskToRepository_showsSuccessMessageUi() {
         // When the ViewModel is asked to save a task
-        mAddEditTaskViewModel.description.set("Some Task Description");
-        mAddEditTaskViewModel.title.set("New Task Title");
+        mAddEditTaskViewModel.getDescription().set("Some Task Description");
+        mAddEditTaskViewModel.getTitle().set("New Task Title");
         mAddEditTaskViewModel.saveTask();
 
         // Then a task is saved in the repository and the view updated
@@ -99,8 +99,8 @@ public class AddEditTaskViewModelTest {
         mGetTaskCallbackCaptor.getValue().onTaskLoaded(testTask);
 
         // Verify the fields were updated
-        assertThat(mAddEditTaskViewModel.title.get(), is(testTask.getTitle()));
-        assertThat(mAddEditTaskViewModel.description.get(), is(testTask.getDescription()));
+        assertThat(mAddEditTaskViewModel.getTitle().get(), is(testTask.getTitle()));
+        assertThat(mAddEditTaskViewModel.getDescription().get(), is(testTask.getDescription()));
     }
 
     @Test
@@ -111,7 +111,7 @@ public class AddEditTaskViewModelTest {
         mAddEditTaskViewModel.onActivityCreated(mock(AddEditTaskActivity.class));
 
         // Before setting the Snackbar text, get its current value
-        String snackbarText = mAddEditTaskViewModel.getSnackbarText();
+        String snackbarText = mAddEditTaskViewModel.getSnackbarTextString();
 
         // Check that the value is null
         assertThat("Snackbar text does not match", snackbarText, is(nullValue()));
@@ -125,10 +125,10 @@ public class AddEditTaskViewModelTest {
         mAddEditTaskViewModel.onActivityCreated(mock(AddEditTaskActivity.class));
 
         // Set a new value for the Snackbar text via the public Observable
-        mAddEditTaskViewModel.snackbarText.set(SNACKBAR_TEXT);
+        mAddEditTaskViewModel.getSnackbarText().set(SNACKBAR_TEXT);
 
         // Get its current value with the Snackbar text getter
-        String snackbarText = mAddEditTaskViewModel.getSnackbarText();
+        String snackbarText = mAddEditTaskViewModel.getSnackbarTextString();
 
         // Check that the value matches the observable's.
         assertThat("Snackbar text does not match", snackbarText, is(SNACKBAR_TEXT));

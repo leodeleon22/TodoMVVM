@@ -17,8 +17,11 @@
 package com.example.android.architecture.blueprints.todoapp.util
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 
-    /**
+/**
      * The `fragment` is added to the container view with id `frameId`. The operation is
      * performed by the `fragmentManager`.
 
@@ -39,3 +42,7 @@ import android.support.v4.app.FragmentManager
         transaction.add(fragment, tag)
         transaction.commit()
     }
+
+fun ViewGroup.inflate(layoutId: Int, attachToRoot: Boolean = false): View {
+    return LayoutInflater.from(context).inflate(layoutId, this, attachToRoot)
+}

@@ -110,7 +110,7 @@ public class TasksActivity extends AppCompatActivity implements TaskItemNavigato
     }
 
     private void setupToolbar() {
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         ActionBar ab = getSupportActionBar();
         ab.setHomeAsUpIndicator(R.drawable.ic_menu);
@@ -118,9 +118,9 @@ public class TasksActivity extends AppCompatActivity implements TaskItemNavigato
     }
 
     private void setupNavigationDrawer() {
-        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        mDrawerLayout = findViewById(R.id.drawer_layout);
         mDrawerLayout.setStatusBarBackground(R.color.colorPrimaryDark);
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        NavigationView navigationView = findViewById(R.id.nav_view);
         if (navigationView != null) {
             setupDrawerContent(navigationView);
         }
@@ -178,13 +178,13 @@ public class TasksActivity extends AppCompatActivity implements TaskItemNavigato
     public void openTaskDetails(String taskId) {
         Intent intent = new Intent(this, TaskDetailActivity.class);
         intent.putExtra(TaskDetailActivity.EXTRA_TASK_ID, taskId);
-        startActivityForResult(intent, AddEditTaskActivity.REQUEST_CODE);
+        startActivityForResult(intent, AddEditTaskActivity.Companion.getREQUEST_CODE());
 
     }
 
     @Override
     public void addNewTask() {
         Intent intent = new Intent(this, AddEditTaskActivity.class);
-        startActivityForResult(intent, AddEditTaskActivity.REQUEST_CODE);
+        startActivityForResult(intent, AddEditTaskActivity.Companion.getREQUEST_CODE());
     }
 }

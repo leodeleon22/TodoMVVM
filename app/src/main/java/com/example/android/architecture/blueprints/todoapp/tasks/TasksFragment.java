@@ -131,7 +131,7 @@ public class TasksFragment extends Fragment {
     public void onDestroy() {
         mListAdapter.onDestroy();
         if (mSnackbarCallback != null) {
-            mTasksViewModel.snackbarText.removeOnPropertyChangedCallback(mSnackbarCallback);
+            mTasksViewModel.getSnackbarText().removeOnPropertyChangedCallback(mSnackbarCallback);
         }
         super.onDestroy();
     }
@@ -140,48 +140,40 @@ public class TasksFragment extends Fragment {
         mSnackbarCallback = new Observable.OnPropertyChangedCallback() {
             @Override
             public void onPropertyChanged(Observable observable, int i) {
-                SnackbarUtilsKt.snack(getView(), mTasksViewModel.getSnackbarText());
+                SnackbarUtilsKt.snack(getView(), mTasksViewModel.getSnackbarTextString());
             }
         };
-        mTasksViewModel.snackbarText.addOnPropertyChangedCallback(mSnackbarCallback);
+        mTasksViewModel.getSnackbarText().addOnPropertyChangedCallback(mSnackbarCallback);
     }
 
     private void showFilteringPopUpMenu() {
         PopupMenu popup = new PopupMenu(getContext(), getActivity().findViewById(R.id.menu_filter));
         popup.getMenuInflater().inflate(R.menu.filter_tasks, popup.getMenu());
 
-        popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-            public boolean onMenuItemClick(MenuItem item) {
-                switch (item.getItemId()) {
-                    case R.id.active:
-                        mTasksViewModel.setFiltering(TasksFilterType.ACTIVE_TASKS);
-                        break;
-                    case R.id.completed:
-                        mTasksViewModel.setFiltering(TasksFilterType.COMPLETED_TASKS);
-                        break;
-                    default:
-                        mTasksViewModel.setFiltering(TasksFilterType.ALL_TASKS);
-                        break;
-                }
-                mTasksViewModel.loadTasks(false);
-                return true;
+        popup.setOnMenuItemClickListener(item -> {
+            switch (item.getItemId()) {
+                case R.id.active:
+                    mTasksViewModel.setFiltering(TasksFilterType.ACTIVE_TASKS);
+                    break;
+                case R.id.completed:
+                    mTasksViewModel.setFiltering(TasksFilterType.COMPLETED_TASKS);
+                    break;
+                default:
+                    mTasksViewModel.setFiltering(TasksFilterType.ALL_TASKS);
+                    break;
             }
+            mTasksViewModel.loadTasks(false);
+            return true;
         });
 
         popup.show();
     }
 
     private void setupFab() {
-        FloatingActionButton fab =
-                (FloatingActionButton) getActivity().findViewById(R.id.fab_add_task);
+        FloatingActionButton fab =  getActivity().findViewById(R.id.fab_add_task);
 
         fab.setImageResource(R.drawable.ic_add);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mTasksViewModel.addNewTask();
-            }
-        });
+        fab.setOnClickListener(v -> mTasksViewModel.addNewTask());
     }
 
     private void setupListAdapter() {
@@ -279,7 +271,7 @@ public class TasksFragment extends Fragment {
                     new Observable.OnPropertyChangedCallback() {
                 @Override
                 public void onPropertyChanged(Observable observable, int i) {
-                    mTasksViewModel.snackbarText.set(viewmodel.getSnackbarTextString());
+                    mTasksViewModel.getSnackbarText().set(viewmodel.getSnackbarTextString());
                 }
             });
             viewmodel.setTask(task);

@@ -111,15 +111,15 @@ public class TasksViewModelTest {
 
 
         // Then progress indicator is shown
-        assertTrue(mTasksViewModel.dataLoading.get());
+        assertTrue(mTasksViewModel.getDataLoading().get());
         mLoadTasksCallbackCaptor.getValue().onTasksLoaded(TASKS);
 
         // Then progress indicator is hidden
-        assertFalse(mTasksViewModel.dataLoading.get());
+        assertFalse(mTasksViewModel.getDataLoading().get());
 
         // And data loaded
-        assertFalse(mTasksViewModel.items.isEmpty());
-        assertTrue(mTasksViewModel.items.size() == 3);
+        assertFalse(mTasksViewModel.getItems().isEmpty());
+        assertTrue(mTasksViewModel.getItems().size() == 3);
     }
 
     @Test
@@ -134,11 +134,11 @@ public class TasksViewModelTest {
         mLoadTasksCallbackCaptor.getValue().onTasksLoaded(TASKS);
 
         // Then progress indicator is hidden
-        assertFalse(mTasksViewModel.dataLoading.get());
+        assertFalse(mTasksViewModel.getDataLoading().get());
 
         // And data loaded
-        assertFalse(mTasksViewModel.items.isEmpty());
-        assertTrue(mTasksViewModel.items.size() == 1);
+        assertFalse(mTasksViewModel.getItems().isEmpty());
+        assertTrue(mTasksViewModel.getItems().size() == 1);
     }
 
     @Test
@@ -153,11 +153,11 @@ public class TasksViewModelTest {
         mLoadTasksCallbackCaptor.getValue().onTasksLoaded(TASKS);
 
         // Then progress indicator is hidden
-        assertFalse(mTasksViewModel.dataLoading.get());
+        assertFalse(mTasksViewModel.getDataLoading().get());
 
         // And data loaded
-        assertFalse(mTasksViewModel.items.isEmpty());
-        assertTrue(mTasksViewModel.items.size() == 2);
+        assertFalse(mTasksViewModel.getItems().isEmpty());
+        assertTrue(mTasksViewModel.getItems().size() == 2);
     }
 
     @Test
@@ -183,7 +183,7 @@ public class TasksViewModelTest {
     public void handleActivityResult_editOK() {
         // When TaskDetailActivity sends a EDIT_RESULT_OK
         mTasksViewModel.handleActivityResult(
-                AddEditTaskActivity.REQUEST_CODE, TaskDetailActivity.EDIT_RESULT_OK);
+                AddEditTaskActivity.Companion.getREQUEST_CODE(), TaskDetailActivity.EDIT_RESULT_OK);
 
         // Then the snackbar shows the correct message
         assertThat(mTasksViewModel.getSnackbarText(), is("EDIT_RESULT_OK"));
@@ -193,7 +193,7 @@ public class TasksViewModelTest {
     public void handleActivityResult_addEditOK() {
         // When AddEditTaskActivity sends a ADD_EDIT_RESULT_OK
         mTasksViewModel.handleActivityResult(
-                AddEditTaskActivity.REQUEST_CODE, AddEditTaskActivity.ADD_EDIT_RESULT_OK);
+                AddEditTaskActivity.Companion.getREQUEST_CODE(), AddEditTaskActivity.Companion.getADD_EDIT_RESULT_OK());
 
         // Then the snackbar shows the correct message
         assertThat(mTasksViewModel.getSnackbarText(), is("ADD_EDIT_RESULT_OK"));
@@ -203,7 +203,7 @@ public class TasksViewModelTest {
     public void handleActivityResult_deleteOk() {
         // When TaskDetailActivity sends a DELETE_RESULT_OK
         mTasksViewModel.handleActivityResult(
-                AddEditTaskActivity.REQUEST_CODE, TaskDetailActivity.DELETE_RESULT_OK);
+                AddEditTaskActivity.Companion.getREQUEST_CODE(), TaskDetailActivity.DELETE_RESULT_OK);
 
         // Then the snackbar shows the correct message
         assertThat(mTasksViewModel.getSnackbarText(), is("DELETE_RESULT_OK"));
@@ -215,13 +215,13 @@ public class TasksViewModelTest {
         mTasksViewModel.setFiltering(TasksFilterType.ALL_TASKS);
 
         // Then the "Add task" action is visible
-        assertThat(mTasksViewModel.tasksAddViewVisible.get(), is(true));
+        assertThat(mTasksViewModel.getTasksAddViewVisible().get(), is(true));
     }
 
     @Test
     public void updateSnackbar_nullValue() {
         // Before setting the Snackbar text, get its current value
-        String snackbarText = mTasksViewModel.getSnackbarText();
+        String snackbarText = mTasksViewModel.getSnackbarTextString();
 
         // Check that the value is null
         assertThat("Snackbar text does not match", snackbarText, is(nullValue()));
@@ -230,10 +230,10 @@ public class TasksViewModelTest {
     @Test
     public void updateSnackbar_nonNullValue() {
         // Set a new value for the Snackbar text via the public Observable
-        mTasksViewModel.snackbarText.set(SNACKBAR_TEXT);
+        mTasksViewModel.getSnackbarText().set(SNACKBAR_TEXT);
 
         // Get its current value with the Snackbar text getter
-        String snackbarText = mTasksViewModel.getSnackbarText();
+        String snackbarText = mTasksViewModel.getSnackbarTextString();
 
         // Check that the value matches the observable's.
         assertThat("Snackbar text does not match", snackbarText, is(SNACKBAR_TEXT));

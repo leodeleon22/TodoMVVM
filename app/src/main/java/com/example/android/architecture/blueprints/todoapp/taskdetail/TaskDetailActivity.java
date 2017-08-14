@@ -30,7 +30,6 @@ import com.example.android.architecture.blueprints.todoapp.addedittask.AddEditTa
 import com.example.android.architecture.blueprints.todoapp.addedittask.AddEditTaskFragment;
 import com.example.android.architecture.blueprints.todoapp.util.ActivityUtilsKt;
 
-import static com.example.android.architecture.blueprints.todoapp.addedittask.AddEditTaskActivity.ADD_EDIT_RESULT_OK;
 import static com.example.android.architecture.blueprints.todoapp.taskdetail.TaskDetailFragment.REQUEST_EDIT_TASK;
 
 /**
@@ -127,7 +126,7 @@ public class TaskDetailActivity extends AppCompatActivity implements TaskDetailN
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == REQUEST_EDIT_TASK) {
             // If the task was edited successfully, go back to the list.
-            if (resultCode == ADD_EDIT_RESULT_OK) {
+            if (resultCode == AddEditTaskActivity.Companion.getADD_EDIT_RESULT_OK()) {
                 // If the result comes from the add/edit screen, it's an edit.
                 setResult(EDIT_RESULT_OK);
                 finish();
@@ -152,7 +151,7 @@ public class TaskDetailActivity extends AppCompatActivity implements TaskDetailN
     public void onStartEditTask() {
         String taskId = getIntent().getStringExtra(EXTRA_TASK_ID);
         Intent intent = new Intent(this, AddEditTaskActivity.class);
-        intent.putExtra(AddEditTaskFragment.ARGUMENT_EDIT_TASK_ID, taskId);
+        intent.putExtra(AddEditTaskFragment.Companion.getARGUMENT_EDIT_TASK_ID(), taskId);
         startActivityForResult(intent, REQUEST_EDIT_TASK);
     }
 }
