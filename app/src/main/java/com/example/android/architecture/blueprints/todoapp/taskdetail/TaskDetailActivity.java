@@ -28,7 +28,7 @@ import com.example.android.architecture.blueprints.todoapp.R;
 import com.example.android.architecture.blueprints.todoapp.ViewModelHolder;
 import com.example.android.architecture.blueprints.todoapp.addedittask.AddEditTaskActivity;
 import com.example.android.architecture.blueprints.todoapp.addedittask.AddEditTaskFragment;
-import com.example.android.architecture.blueprints.todoapp.util.ActivityUtils;
+import com.example.android.architecture.blueprints.todoapp.util.ActivityUtilsKt;
 
 import static com.example.android.architecture.blueprints.todoapp.addedittask.AddEditTaskActivity.ADD_EDIT_RESULT_OK;
 import static com.example.android.architecture.blueprints.todoapp.taskdetail.TaskDetailFragment.REQUEST_EDIT_TASK;
@@ -90,7 +90,7 @@ public class TaskDetailActivity extends AppCompatActivity implements TaskDetailN
                     Injection.provideTasksRepository(getApplicationContext()));
 
             // and bind it to this Activity's lifecycle using the Fragment Manager.
-            ActivityUtils.addFragmentToActivity(
+            ActivityUtilsKt.addFragmentToActivity(
                     getSupportFragmentManager(),
                     ViewModelHolder.createContainer(viewModel),
                     TASKDETAIL_VIEWMODEL_TAG);
@@ -109,7 +109,7 @@ public class TaskDetailActivity extends AppCompatActivity implements TaskDetailN
         if (taskDetailFragment == null) {
             taskDetailFragment = TaskDetailFragment.newInstance(taskId);
 
-            ActivityUtils.addFragmentToActivity(getSupportFragmentManager(),
+            ActivityUtilsKt.addFragmentToActivity(getSupportFragmentManager(),
                     taskDetailFragment, R.id.contentFrame);
         }
         return taskDetailFragment;

@@ -30,7 +30,7 @@ import android.view.ViewGroup;
 
 import com.example.android.architecture.blueprints.todoapp.R;
 import com.example.android.architecture.blueprints.todoapp.databinding.AddtaskFragBinding;
-import com.example.android.architecture.blueprints.todoapp.util.SnackbarUtils;
+import com.example.android.architecture.blueprints.todoapp.util.SnackbarUtilsKt;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
@@ -109,7 +109,7 @@ public class AddEditTaskFragment extends Fragment {
         mSnackbarCallback = new Observable.OnPropertyChangedCallback() {
             @Override
             public void onPropertyChanged(Observable observable, int i) {
-                SnackbarUtils.showSnackbar(getView(), mViewModel.getSnackbarText());
+                SnackbarUtilsKt.snack(getView(), mViewModel.getSnackbarText());
             }
         };
         mViewModel.snackbarText.addOnPropertyChangedCallback(mSnackbarCallback);

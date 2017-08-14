@@ -30,7 +30,7 @@ import android.view.ViewGroup;
 
 import com.example.android.architecture.blueprints.todoapp.R;
 import com.example.android.architecture.blueprints.todoapp.databinding.TaskdetailFragBinding;
-import com.example.android.architecture.blueprints.todoapp.util.SnackbarUtils;
+import com.example.android.architecture.blueprints.todoapp.util.SnackbarUtilsKt;
 
 
 /**
@@ -78,22 +78,16 @@ public class TaskDetailFragment extends Fragment {
         mSnackbarCallback = new Observable.OnPropertyChangedCallback() {
             @Override
             public void onPropertyChanged(Observable observable, int i) {
-                SnackbarUtils.showSnackbar(getView(), mViewModel.getSnackbarText());
+                SnackbarUtilsKt.snack(getView(), mViewModel.getSnackbarText());
             }
         };
         mViewModel.snackbarText.addOnPropertyChangedCallback(mSnackbarCallback);
     }
 
     private void setupFab() {
-        FloatingActionButton fab =
-                (FloatingActionButton) getActivity().findViewById(R.id.fab_edit_task);
+        FloatingActionButton fab = getActivity().findViewById(R.id.fab_edit_task);
 
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mViewModel.startEditTask();
-            }
-        });
+        fab.setOnClickListener(v -> mViewModel.startEditTask());
     }
 
     @Override

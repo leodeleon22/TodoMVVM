@@ -35,7 +35,7 @@ import com.example.android.architecture.blueprints.todoapp.ViewModelHolder;
 import com.example.android.architecture.blueprints.todoapp.addedittask.AddEditTaskActivity;
 import com.example.android.architecture.blueprints.todoapp.statistics.StatisticsActivity;
 import com.example.android.architecture.blueprints.todoapp.taskdetail.TaskDetailActivity;
-import com.example.android.architecture.blueprints.todoapp.util.ActivityUtils;
+import com.example.android.architecture.blueprints.todoapp.util.ActivityUtilsKt;
 import com.example.android.architecture.blueprints.todoapp.util.EspressoIdlingResource;
 
 
@@ -88,7 +88,7 @@ public class TasksActivity extends AppCompatActivity implements TaskItemNavigato
                     Injection.provideTasksRepository(getApplicationContext()),
                     getApplicationContext());
             // and bind it to this Activity's lifecycle using the Fragment Manager.
-            ActivityUtils.addFragmentToActivity(
+            ActivityUtilsKt.addFragmentToActivity(
                     getSupportFragmentManager(),
                     ViewModelHolder.createContainer(viewModel),
                     TASKS_VIEWMODEL_TAG);
@@ -103,7 +103,7 @@ public class TasksActivity extends AppCompatActivity implements TaskItemNavigato
         if (tasksFragment == null) {
             // Create the fragment
             tasksFragment = TasksFragment.newInstance();
-            ActivityUtils.addFragmentToActivity(
+            ActivityUtilsKt.addFragmentToActivity(
                     getSupportFragmentManager(), tasksFragment, R.id.contentFrame);
         }
         return tasksFragment;
@@ -166,7 +166,7 @@ public class TasksActivity extends AppCompatActivity implements TaskItemNavigato
 
     @VisibleForTesting
     public IdlingResource getCountingIdlingResource() {
-        return EspressoIdlingResource.getIdlingResource();
+        return EspressoIdlingResource.INSTANCE.getIdlingResource();
     }
 
     @Override

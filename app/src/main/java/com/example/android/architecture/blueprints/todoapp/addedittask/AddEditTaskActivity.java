@@ -27,7 +27,7 @@ import android.support.v7.widget.Toolbar;
 import com.example.android.architecture.blueprints.todoapp.Injection;
 import com.example.android.architecture.blueprints.todoapp.R;
 import com.example.android.architecture.blueprints.todoapp.ViewModelHolder;
-import com.example.android.architecture.blueprints.todoapp.util.ActivityUtils;
+import com.example.android.architecture.blueprints.todoapp.util.ActivityUtilsKt;
 import com.example.android.architecture.blueprints.todoapp.util.EspressoIdlingResource;
 
 /**
@@ -50,7 +50,7 @@ public class AddEditTaskActivity extends AppCompatActivity implements AddEditTas
 
     @VisibleForTesting
     public IdlingResource getCountingIdlingResource() {
-        return EspressoIdlingResource.getIdlingResource();
+        return EspressoIdlingResource.INSTANCE.getIdlingResource();
     }
 
     @Override
@@ -102,7 +102,7 @@ public class AddEditTaskActivity extends AppCompatActivity implements AddEditTas
                     getIntent().getStringExtra(AddEditTaskFragment.ARGUMENT_EDIT_TASK_ID));
             addEditTaskFragment.setArguments(bundle);
 
-            ActivityUtils.addFragmentToActivity(getSupportFragmentManager(),
+            ActivityUtilsKt.addFragmentToActivity(getSupportFragmentManager(),
                     addEditTaskFragment, R.id.contentFrame);
         }
         return addEditTaskFragment;
@@ -126,7 +126,7 @@ public class AddEditTaskActivity extends AppCompatActivity implements AddEditTas
                     Injection.provideTasksRepository(getApplicationContext()));
 
             // and bind it to this Activity's lifecycle using the Fragment Manager.
-            ActivityUtils.addFragmentToActivity(
+            ActivityUtilsKt.addFragmentToActivity(
                     getSupportFragmentManager(),
                     ViewModelHolder.createContainer(viewModel),
                     ADD_EDIT_VIEWMODEL_TAG);

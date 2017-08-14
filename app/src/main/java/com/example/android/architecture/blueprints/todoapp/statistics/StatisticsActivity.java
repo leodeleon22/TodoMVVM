@@ -31,7 +31,7 @@ import com.example.android.architecture.blueprints.todoapp.Injection;
 import com.example.android.architecture.blueprints.todoapp.R;
 import com.example.android.architecture.blueprints.todoapp.ViewModelHolder;
 import com.example.android.architecture.blueprints.todoapp.tasks.TasksActivity;
-import com.example.android.architecture.blueprints.todoapp.util.ActivityUtils;
+import com.example.android.architecture.blueprints.todoapp.util.ActivityUtilsKt;
 
 /**
  * Show statistics for tasks.
@@ -89,7 +89,7 @@ public class StatisticsActivity extends AppCompatActivity {
                     Injection.provideTasksRepository(getApplicationContext()));
 
             // and bind it to this Activity's lifecycle using the Fragment Manager.
-            ActivityUtils.addFragmentToActivity(
+            ActivityUtilsKt.addFragmentToActivity(
                     getSupportFragmentManager(),
                     ViewModelHolder.createContainer(viewModel),
                     STATS_VIEWMODEL_TAG);
@@ -103,8 +103,7 @@ public class StatisticsActivity extends AppCompatActivity {
                 .findFragmentById(R.id.contentFrame);
         if (statisticsFragment == null) {
             statisticsFragment = StatisticsFragment.newInstance();
-            ActivityUtils.addFragmentToActivity(getSupportFragmentManager(),
-                    statisticsFragment, R.id.contentFrame);
+            ActivityUtilsKt.addFragmentToActivity(getSupportFragmentManager(), statisticsFragment, R.id.contentFrame);
         }
         return statisticsFragment;
     }
