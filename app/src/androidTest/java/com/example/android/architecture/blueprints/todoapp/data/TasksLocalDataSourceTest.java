@@ -21,7 +21,6 @@ import android.support.test.runner.AndroidJUnit4;
 import android.test.suitebuilder.annotation.LargeTest;
 
 import com.example.android.architecture.blueprints.todoapp.data.source.TasksDataSource;
-import com.example.android.architecture.blueprints.todoapp.data.source.local.TasksDbHelper;
 import com.example.android.architecture.blueprints.todoapp.data.source.local.TasksLocalDataSource;
 
 import org.junit.After;
@@ -41,9 +40,6 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 
-/**
- * Integration test for the {@link TasksDataSource}, which uses the {@link TasksDbHelper}.
- */
 @RunWith(AndroidJUnit4.class)
 @LargeTest
 public class TasksLocalDataSourceTest {
@@ -58,7 +54,7 @@ public class TasksLocalDataSourceTest {
 
     @Before
     public void setup() {
-         mLocalDataSource = TasksLocalDataSource.getInstance(
+         mLocalDataSource = TasksLocalDataSource.Companion.getInstance(
                  InstrumentationRegistry.getTargetContext());
     }
 

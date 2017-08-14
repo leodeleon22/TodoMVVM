@@ -30,7 +30,7 @@ private constructor(tasksRemoteDataSource: TasksDataSource,
 
     private val mTasksRemoteDataSource: TasksDataSource
     private val mTasksLocalDataSource: TasksDataSource
-    internal var mCachedTasks: MutableMap<String, Task>? = null
+    var mCachedTasks: MutableMap<String, Task>? = null
     internal var mCacheIsDirty = false
 
     init {

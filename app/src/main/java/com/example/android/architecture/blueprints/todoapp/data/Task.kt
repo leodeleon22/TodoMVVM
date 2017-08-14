@@ -15,21 +15,23 @@
  */
 
 package com.example.android.architecture.blueprints.todoapp.data
+import android.arch.persistence.room.Entity
+import android.arch.persistence.room.Ignore
 import java.util.UUID
 
+@Entity(tableName = "tasks", primaryKeys = arrayOf("id"))
 data class Task
+(var title: String,
+ var description: String,
+ var id: String,
+ var isCompleted: Boolean) {
+    @Ignore constructor(title: String, description: String ) : this(title, description, UUID.randomUUID().toString(), false)
+    @Ignore constructor(title: String, description: String, isCompleted: Boolean ) : this(title, description, UUID.randomUUID().toString(), isCompleted)
+    @Ignore constructor(title: String, description: String, id: String? ) : this(title, description, id?: UUID.randomUUID().toString(), false)
 
-@JvmOverloads
-constructor(val title: String?,
-            val description: String?,
-            val id: String = UUID.randomUUID().toString(),
-            var isCompleted: Boolean = false) {
-
-    constructor(title: String?,
-                description: String?,
-                completed: Boolean) : this(title, description, UUID.randomUUID().toString(), completed)
 
     val titleForList: String?
+        @Ignore
         get() {
             if (!title.isNullOrEmpty()) {
                 return title
@@ -39,9 +41,11 @@ constructor(val title: String?,
         }
 
     val isActive: Boolean
+        @Ignore
         get() = !isCompleted
 
     val isEmpty: Boolean
+        @Ignore
         get() = title.isNullOrEmpty() && description.isNullOrEmpty()
 
 }
