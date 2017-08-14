@@ -90,7 +90,7 @@ public class TasksActivity extends AppCompatActivity implements TaskItemNavigato
             // and bind it to this Activity's lifecycle using the Fragment Manager.
             ActivityUtilsKt.addFragmentToActivity(
                     getSupportFragmentManager(),
-                    ViewModelHolder.createContainer(viewModel),
+                    ViewModelHolder.Companion.createContainer(viewModel),
                     TASKS_VIEWMODEL_TAG);
             return viewModel;
         }

@@ -128,7 +128,7 @@ public class AddEditTaskActivity extends AppCompatActivity implements AddEditTas
             // and bind it to this Activity's lifecycle using the Fragment Manager.
             ActivityUtilsKt.addFragmentToActivity(
                     getSupportFragmentManager(),
-                    ViewModelHolder.createContainer(viewModel),
+                    ViewModelHolder.Companion.createContainer(viewModel),
                     ADD_EDIT_VIEWMODEL_TAG);
             return viewModel;
         }

@@ -92,7 +92,7 @@ public class TaskDetailActivity extends AppCompatActivity implements TaskDetailN
             // and bind it to this Activity's lifecycle using the Fragment Manager.
             ActivityUtilsKt.addFragmentToActivity(
                     getSupportFragmentManager(),
-                    ViewModelHolder.createContainer(viewModel),
+                    ViewModelHolder.Companion.createContainer(viewModel),
                     TASKDETAIL_VIEWMODEL_TAG);
             return viewModel;
         }
